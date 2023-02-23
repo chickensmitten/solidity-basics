@@ -148,6 +148,14 @@
   - To first test, have to setup a local test network with Ganache
   - Then write code in [Inbox.test.js](/test/Inbox.test.js)
   - run `npm run test` to test the contract
+- Deploying Steps:
+  - Refer to [deploy.js](/deploy.js)
+  - environment variable
+    - Ensure that you have install `npm i dotenv`
+    - Then in the `.env` file, add the relevant variables
+    - Add `require('dotenv').config()` in `deploy.js`
+    - Then use `process.env.ENV_VARIABLE` or something similar to put in environment variable
+  - run `node deploy.js`
 - Web3 Providers
   > **Web3 Versioning Isses**: Newer version of web3 supports promises and async/await. Older version before `v0.x.x` doesn't and uses callback functions for async code. Can consider `ether.js` as alternative.
   - Web3.js is a collection of libraries that allow developers to interact with a remote or local Ethereum node using HTTP, IPC, or WebSocket
