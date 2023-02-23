@@ -99,15 +99,14 @@
 
 ## Smart Contracts
 > **Older Libraries**: The libaries used in this section maybe deprecated, but the essence of the lessons remain the same.
-> **Web3 Versioning Isses**: Newer version of web3 supports promises and async/await. Older version before `v0.x.x` doesn't and uses callback functions for async code. Can consider `ether.js` as alternative.
 - Deployment of smart contracts using Truffle. Truffle also allows for contract creation and local testing.
-- For the smart contract to work we need a boilerplates that can do the following:
+- Deploying Smart Contract: For the smart contract to work we need a boilerplates that can do the following:
   - Write solidity code in a Javascript project
     - Solution: Set up Solidity compiler in npm packages. Or in the future in ReactJS or NextJS framework
   - Rapidly test contracts without doing manual testing
     - Solution: Use custom Mocha test runner
-  - Deploy contract to the public networks
-    - Solution: Setup a deploy script
+  - Compile then deploy contract to the public networks
+    - Solution: Setup a compile and deploy script
 - Project Directory:
   - Contracts folder: this contains `.sol` files
   - Test folder: this contacts `.test.js` files
@@ -145,5 +144,12 @@
   }
   ```
 - Testing Steps:
+  > **TDD Driven Development**: Writing solidity code is very much a TDD process. Write the test first, then write the solidity code, then run test.
   - To first test, have to setup a local test network with Ganache
   - Then write code in [Inbox.test.js](/test/Inbox.test.js)
+  - run `npm run test` to test the contract
+- Web3 Providers
+  > **Web3 Versioning Isses**: Newer version of web3 supports promises and async/await. Older version before `v0.x.x` doesn't and uses callback functions for async code. Can consider `ether.js` as alternative.
+  - Web3.js is a collection of libraries that allow developers to interact with a remote or local Ethereum node using HTTP, IPC, or WebSocket
+  - `const Web3 = require("web3");` to create an instance of web3
+  - Then use a provider `const web3 = new Web3(ganache.provider());` to communicate between the test network like ganache and web3
