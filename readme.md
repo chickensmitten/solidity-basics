@@ -1,4 +1,5 @@
 # Solidity Basics
+> !!! Note, some of the code here has been deprecated, but the core lessons still remain.
 
 ## What is Ethereum Intro
 - Click here for [Intro](/public/articles/intro.md)
@@ -101,11 +102,11 @@
 > **Older Libraries**: The libaries used in this section maybe deprecated, but the essence of the lessons remain the same. Refer to [update inbox project files](/public/articles/update_inbox_project.md) 
 - Deployment of smart contracts using Truffle. Truffle also allows for contract creation and local testing.
 - Deploying Smart Contract: For the smart contract to work we need a boilerplates that can do the following:
-  - Write solidity code in a Javascript project
+  1. Write solidity code in a Javascript project
     - Solution: Set up Solidity compiler in npm packages. Or in the future in ReactJS or NextJS framework
-  - Rapidly test contracts without doing manual testing
+  2. Rapidly test contracts without doing manual testing
     - Solution: Use custom Mocha test runner
-  - Compile then deploy contract to the public networks
+  3. Compile then deploy contract to the public networks
     - Solution: Setup a compile and deploy script
 - Project Directory:
   - Contracts folder: this contains `.sol` files
@@ -113,12 +114,12 @@
   - `package.json` is for dependencies in project
   - `compile.js` is to compile code
   - `deploy.js` is to take compile code and deploy to a network
-- Installation
+1. Installation
   - setup `npm init`
   - install `npm install mocha ganache-cli solc` etc etc. refer to [package.json](/package.json)
-- Compilation Steps:
-  - First, put your contract to [Inbox.sol](/contracts/Inbox.sol).
-  - Then, run `node compile.js` to start compiling. Refer to [compile.js](/compile.js) for more information on how the compilation works. `console.log(solc.compile(source, 1));` will return the `interface` aka ABI, there is also `bytecode`. It should return the following. The `error` basically says that the contract's `constructor` method is deprecated and should use the new one. 
+- Steps to write smart contract:
+  1. First, put your contract to [Inbox.sol](/contracts/Inbox.sol).
+  2. Then, run `node compile.js` to start compiling. Refer to [compile.js](/compile.js) for more information on how the compilation works. `console.log(solc.compile(source, 1));` will return the `interface` aka ABI, there is also `bytecode`. It should return the following. The `error` basically says that the contract's `constructor` method is deprecated and should use the new one. 
   ```
   {
     contracts: {
@@ -143,19 +144,19 @@
     sources: { '': { AST: [Object] } }
   }
   ```
-- Testing Steps:
-  > **TDD Driven Development**: Writing solidity code is very much a TDD process. Write the test first, then write the solidity code, then run test.
-  - To first test, have to setup a local test network with Ganache
-  - Then write code in [Inbox.test.js](/test/Inbox.test.js)
-  - run `npm run test` to test the contract
-- Deploying Steps:
-  - Refer to [deploy.js](/deploy.js)
-  - environment variable
-    - Ensure that you have install `npm i dotenv`
-    - Then in the `.env` file, add the relevant variables
-    - Add `require('dotenv').config()` in `deploy.js`
-    - Then use `process.env.ENV_VARIABLE` or something similar to put in environment variable
-  - run `node deploy.js`
+  3. Testing Steps:
+    > **TDD Driven Development**: Writing solidity code is very much a TDD process. Write the test first, then write the solidity code, then run test.
+    - To first test, have to setup a local test network with Ganache
+    - Then write code in [Inbox.test.js](/test/Inbox.test.js)
+    - run `npm run test` to test the contract
+  4. Deploying Steps:
+    - Refer to [deploy.js](/deploy.js)
+    - environment variable
+      - Ensure that you have install `npm i dotenv`
+      - Then in the `.env` file, add the relevant variables
+      - Add `require('dotenv').config()` in `deploy.js`
+      - Then use `process.env.ENV_VARIABLE` or something similar to put in environment variable
+    - run `node deploy.js`
 - Web3 Providers
   > **Web3 Versioning Isses**: Newer version of web3 supports promises and async/await. Older version before `v0.x.x` doesn't and uses callback functions for async code. Can consider `ether.js` as alternative.
   - Web3.js is a collection of libraries that allow developers to interact with a remote or local Ethereum node using HTTP, IPC, or WebSocket
