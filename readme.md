@@ -48,12 +48,12 @@
   - `public view` is a function type
   - `returns (string)` is to specify the type of return value. It is used for constant and view function types
   - Common function types: public, private, view, constant, pure, payable
-    - public: anyone can call this function
-    - private: only this contract can call this function
-    - view: this function returns data and does not modify the contract data. Same as below.
-    - constant: this function returns data and does not modify the contract data. Same as above.
-    - pure: function will not modify or even read the contract's data
-    - payable: when someone call this function, they might send ether.
+    - `public`: anyone can call this function. Note, it has been replaced by `memory`
+    - `private`: only this contract can call this function
+    - `view`: this function returns data and does not modify the contract data. Same as below.
+    - `constant`: this function returns data and does not modify the contract data. Same as above.
+    - `pure`: function will not modify or even read the contract's data
+    - `payable`: when someone call this function, they might send ether.
 - Deploying the contract
   - Steps: Contract source code -> compile to bytecode -> deploy to a network (test or main). In remix, you can deploy to "JavaScript VM"
   - Behind the scenes for deployment
@@ -98,7 +98,7 @@
 ```
 
 ## Smart Contracts
-> **Older Libraries**: The libaries used in this section maybe deprecated, but the essence of the lessons remain the same.
+> **Older Libraries**: The libaries used in this section maybe deprecated, but the essence of the lessons remain the same. Refer to [update inbox project files](/public/articles/update_inbox_project.md) 
 - Deployment of smart contracts using Truffle. Truffle also allows for contract creation and local testing.
 - Deploying Smart Contract: For the smart contract to work we need a boilerplates that can do the following:
   - Write solidity code in a Javascript project
