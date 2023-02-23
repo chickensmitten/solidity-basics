@@ -96,3 +96,6 @@
     return message;
   }
 ```
+
+## Smart Contracts
+- Deployment of smart contracts using Truffle. Truffle also allows for contract creation and local testing.
