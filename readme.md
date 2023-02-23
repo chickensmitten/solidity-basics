@@ -98,4 +98,52 @@
 ```
 
 ## Smart Contracts
+> **Older Libraries**: The libaries used in this section maybe deprecated, but the essence of the lessons remain the same.
+> **Web3 Versioning Isses**: Newer version of web3 supports promises and async/await. Older version before `v0.x.x` doesn't and uses callback functions for async code. Can consider `ether.js` as alternative.
 - Deployment of smart contracts using Truffle. Truffle also allows for contract creation and local testing.
+- For the smart contract to work we need a boilerplates that can do the following:
+  - Write solidity code in a Javascript project
+    - Solution: Set up Solidity compiler in npm packages. Or in the future in ReactJS or NextJS framework
+  - Rapidly test contracts without doing manual testing
+    - Solution: Use custom Mocha test runner
+  - Deploy contract to the public networks
+    - Solution: Setup a deploy script
+- Project Directory:
+  - Contracts folder: this contains `.sol` files
+  - Test folder: this contacts `.test.js` files
+  - `package.json` is for dependencies in project
+  - `compile.js` is to compile code
+  - `deploy.js` is to take compile code and deploy to a network
+- Installation
+  - setup `npm init`
+  - install `npm install mocha ganache-cli solc` etc etc. refer to [package.json](/package.json)
+- Compilation Steps:
+  - First, put your contract to [Inbox.sol](/contracts/Inbox.sol).
+  - Then, run `node compile.js` to start compiling. Refer to [compile.js](/compile.js) for more information on how the compilation works. `console.log(solc.compile(source, 1));` will return the `interface` aka ABI, there is also `bytecode`. It should return the following. The `error` basically says that the contract's `constructor` method is deprecated and should use the new one. 
+  ```
+  {
+    contracts: {
+      ':Inbox': {
+        assembly: [Object],
+        bytecode: '608 ... 060',
+        functionHashes: [Object],
+        gasEstimates: [Object],
+        interface: '[{ ... }]',
+        metadata: '{ ... },"version":1}',
+        opcodes: 'PUSH1 0x80 ... PUSH12 0x550F2A8091269A3294CB0029 ',
+        runtimeBytecode: '60806 ... 4cb0029',
+        srcmap: '127:769:0:- ... ;;;;;;'
+      }
+    },
+    errors: [
+      ':10:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.\n' +
+        '  function Inbox(string initialMessage) public { // this is a constructor function, it is called one time when the contract is deployed to the blockchain\n' +
+        '  ^ (Relevant source part starts here and spans across multiple lines).\n'
+    ],
+    sourceList: [ '' ],
+    sources: { '': { AST: [Object] } }
+  }
+  ```
+- Testing Steps:
+  - To first test, have to setup a local test network with Ganache
+  - Then write code in [Inbox.test.js](/test/Inbox.test.js)

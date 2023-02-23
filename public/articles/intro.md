@@ -1,4 +1,4 @@
-# Intro
+# What is Ethereum Intro
 - Lessons are from Stphen Grider, 
 Ethereum and Solidity: The Complete Developer's Guide in Udemy
 - [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf)
