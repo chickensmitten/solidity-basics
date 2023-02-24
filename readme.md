@@ -234,7 +234,9 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
 ![web3 metamask](/public/images/04_98_web3_metamask.png)
 - This allows us to instantly get access to a copy of web3 that points to a blockchain network.
 
-
+### Mocha
+- `.call()` is get method
+- `.send()` is modifying data aka setter method.
 
 ### Deployment
 - Deployment of smart contracts using Truffle. Truffle also allows for contract creation and local testing.
@@ -262,7 +264,8 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
   - setup `npm init`
   - install `npm install mocha ganache-cli solc` etc etc. refer to [package.json](/package.json)
 - Steps to write smart contract:
-  1. First, put your contract to [Inbox.sol](/contracts/Inbox.sol).
+  0. Draw up the contracts, variables, functions and structs required for the smart contract app.
+  1. Then, put your contract to [Inbox.sol](/contracts/Inbox.sol).
   2. Then, run `node compile.js`  or run the compile script from `package.json` to start compiling. Refer to [compile.js](/compile.js) for more information on how the compilation works. `console.log(solc.compile(source, 1));` will return the `interface` aka ABI, there is also `bytecode`. It should return the following. The `error` basically says that the contract's `constructor` method is deprecated and should use the new one. 
   ```
   {
