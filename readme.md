@@ -34,14 +34,60 @@
   - `fixed array`: array that contains a single type of element. has an unchanging length. `int[3] => [1,2,3]`, `bool[2] => [true, false]`
   - `dynamic array`: array that contains a single type of element. Size can change. `int[] => [9,2,6,5]`, `bool[] => [true, true, false]`
   - `mapping`: collection of key value pairs. i.e. Javascript objects, Ruby hashes, Python dictionary. `mapping(string => string)` or `mapping(int => bool)`. Use a ,mapping to represent many things like a mapping of strings, ints or structs.
-  - `struct`: collection of key value pairs that can have different types. Use a struct to represent singular things.
+  - `struct`: collection of key value pairs that can have different types. Use a struct to represent singular things. `struct` are generally used to create instances of a class, almost like product created by a factory.
   ```
-  strut Car {
-    string make;
-    string model;
+  // init struct
+  struct Request {
+    string description;
     uint value;
+    address recipient;
+    bool complete;
+    uint approvalCount;
+    mapping(address => bool) approvals;
+  }
+
+  ...
+
+  Request[] public requests; // in variables
+
+  ...
+
+  // using request struct
+  function createRequest(string memory description, uint value, address recipient) public restricted {
+      Request storage newRequest = requests.push(); 
+      newRequest.description = description;
+      newRequest.value= value;
+      newRequest.recipient= recipient;
+      newRequest.complete= false;
+      newRequest.approvalCount= 0;
+  }  
+  ```
+
+### Storage and Memory
+- storage and memory in solidity sometimes references **where our contract stores data**. Sometimes, it references **how our solidity variables store values**.
+  - code example
+  ```
+  int[] public numbers;
+
+  function Numbers() public {
+    numbers.push(20);
+    numbers.push(32);
+    changeArray(numbers);
+  }
+
+  function changeArray(int[] storage myArray) private {
+    myArray[0] = 1;
   }
   ```
+  - Where data is stored
+    - storage holds data like using variables to preserve it
+    - memory holds data temporarily. arguments to functions are memory data. For example `int[] myArray` in `function changeArray(int[] myArray) private { ... }` is memory by default
+  - How data is stored
+    - when storage is used, `myArray` variable will point to the exact same array as `numbers` in storage
+    - when using memory, solidity will create a copy of `int[]` and put it into memory. `myArray` will not point to the storage, but instead, point to the memory as a duplicate of the one in storage
+- why is there a distinction? storage creates a reference variable to the actual variable in storage while memory creates an instance variable or a duplicate that is temporary stored. if storage is used in `function changeArray(int[] storage myArray) private { ... }`, `numbers[0]` will be 1. if it is not used (if nothing is used memory is implemented by default) or memory is used `function changeArray(int[] memory myArray) private { ... }`, `numbers[0]` will be 20.
+- temporary variables in memory only persists during runtime. Once runtime is finished, the variables is lost.
+- permananent variables in storage persists throughout the entirety of the contract.
 
 ### Global Variables
 - `msg.data`: data field from the call or transaction that invoked the current function
