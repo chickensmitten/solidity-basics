@@ -175,6 +175,13 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
   }
   ```
 
+### How Metamask works with your web browser
+- Whenever Metamask is running in your browser, it automatically injects web3 library into any active page. Can verify this by typing `web3` in browser console
+![web3 metamask](/public/images/04_98_web3_metamask.png)
+- This allows us to instantly get access to a copy of web3 that points to a blockchain network.
+
+
+
 ### Deployment
 - Deployment of smart contracts using Truffle. Truffle also allows for contract creation and local testing.
 - Deploying the contract
@@ -246,7 +253,3 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
   - Web3.js is a collection of libraries that allow developers to interact with a remote or local Ethereum node using HTTP, IPC, or WebSocket
   - `const Web3 = require("web3");` to create an instance of web3
   - Then use a provider `const web3 = new Web3(ganache.provider());` to communicate between the test network like ganache and web3
-
-### How Metamask works with your web browser
-- Whenever Metamask is running in your browser, it automatically injects web3 library into any active page. Can verify this by typing `web3` in browser console
-- This allows us to instantly get access to a copy of web3 that points to a blockchain network.
