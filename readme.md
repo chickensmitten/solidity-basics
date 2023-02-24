@@ -202,7 +202,7 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
   - install `npm install mocha ganache-cli solc` etc etc. refer to [package.json](/package.json)
 - Steps to write smart contract:
   1. First, put your contract to [Inbox.sol](/contracts/Inbox.sol).
-  2. Then, run `node compile.js` to start compiling. Refer to [compile.js](/compile.js) for more information on how the compilation works. `console.log(solc.compile(source, 1));` will return the `interface` aka ABI, there is also `bytecode`. It should return the following. The `error` basically says that the contract's `constructor` method is deprecated and should use the new one. 
+  2. Then, run `node compile.js`  or run the compile script from `package.json` to start compiling. Refer to [compile.js](/compile.js) for more information on how the compilation works. `console.log(solc.compile(source, 1));` will return the `interface` aka ABI, there is also `bytecode`. It should return the following. The `error` basically says that the contract's `constructor` method is deprecated and should use the new one. 
   ```
   {
     contracts: {
@@ -232,6 +232,7 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
     - To first test, have to setup a local test network with Ganache
     - Then write code in [Inbox.test.js](/test/Inbox.test.js)
     - run `npm run test` to test the contract
+    - For more code examples check [Lottery.test.js](https://github.com/chickensmitten/solidity-lottery/blob/main/test/Lottery.test.js)
   4. Deploying Steps:
     - Refer to [deploy.js](/deploy.js)
     - environment variable
@@ -239,9 +240,13 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
       - Then in the `.env` file, add the relevant variables
       - Add `require('dotenv').config()` in `deploy.js`
       - Then use `process.env.ENV_VARIABLE` or something similar to put in environment variable
-    - run `node deploy.js`
+    - run `node deploy.js` or run the deploy script from `package.json`
 - Web3 Providers
   > **Web3 Versioning Isses**: Newer version of web3 supports promises and async/await. Older version before `v0.x.x` doesn't and uses callback functions for async code. Can consider `ether.js` as alternative.
   - Web3.js is a collection of libraries that allow developers to interact with a remote or local Ethereum node using HTTP, IPC, or WebSocket
   - `const Web3 = require("web3");` to create an instance of web3
   - Then use a provider `const web3 = new Web3(ganache.provider());` to communicate between the test network like ganache and web3
+
+### How Metamask works with your web browser
+- Whenever Metamask is running in your browser, it automatically injects web3 library into any active page. Can verify this by typing `web3` in browser console
+- This allows us to instantly get access to a copy of web3 that points to a blockchain network.
