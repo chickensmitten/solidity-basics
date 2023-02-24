@@ -89,6 +89,10 @@
 - temporary variables in memory only persists during runtime. Once runtime is finished, the variables is lost.
 - permananent variables in storage persists throughout the entirety of the contract.
 
+### Mappings and Arrays
+- When designing your own contract, it is encouraged to not use array because of the amount of gas cost to loop through the array. Especially when the array is growing without bound. This is also a reason why we have `fixed array` e.g `int[3]`. 
+- Better to use mappings more. because the search time is constant, while an array search time is linear.
+
 ### Global Variables
 - `msg.data`: data field from the call or transaction that invoked the current function
 - `msg.gas`: amount of gas the current function invocation has available
@@ -188,6 +192,10 @@ const myArray = [
 ];
 ```
 Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot communicate and translate in nested dynamic arrays.
+- ***Keys not stored in mappings***: This means we can't get a list of keys in Solidity. We can only get it individually through lookups when we know the keys. Mappings uses a classic data structure called hash table with a lookup process
+![keys not stored](/public/images/05_130_keys_not_stored.png))
+- ***Values are not iterable in mappings***: We cannot loop through values in mappings.
+- ***All values exists in mappings***: if you lookup a key that doesn't exist in mapping, it will always returns true. if it is a string of arrays, it will return an empty string.
 
 ## Smart Contracts
 > **Older Libraries**: The libaries used in this section maybe deprecated, but the essence of the lessons remain the same. Refer to [update inbox project files](/public/articles/update_inbox_project.md) 
