@@ -43,7 +43,6 @@
   }
   ```
 
-
 ### Global Variables
 - `msg.data`: data field from the call or transaction that invoked the current function
 - `msg.gas`: amount of gas the current function invocation has available
@@ -87,6 +86,35 @@
   ![gas transaction](/public/images/01_28_gas_transaction.png)
   - This is the outcome of the calculation
   ![gas calculation](/public/images/01_28_gas_calculation.png)
+
+### Require
+- Validation with `require();`
+  - example validation code
+  ```
+  function enter() public payable {
+    require(msg.value > 0.1 ether); // this means the person using the current function needs to send some eth value, before their address can be added to `address[]`
+
+    players.push(msg.sender);
+  }
+  ```
+
+### Modifier
+- `modifier` changes a function when it is called in it
+- It can be used to help with repetitive logic
+- `_;` in a `modifier` means run the rest of the code.
+- Code example below, add `require();` to all relevant functions with `modifier`. in the code below a `modifier` with the name `restricted()` is created. So long as a function calls `restricted()` in it. the `require()` function will come into effect.
+```
+  function pickWinner() public restricted {
+    uint index = random() % players.length;
+    players[index].transfer(this.balance);
+    players = new address[](0);
+  }
+  
+  modifier restricted() {
+    require(msg.sender == manager);
+    _;
+  }
+```
 
 ### Mnemonic Phrases
 - Mnemonic Phrases is a 12 word mnemonic. When fed into a BIP39 mnemonic algorithm, it will create all your accounts with addresses, private key and public key.
@@ -144,15 +172,6 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
           return message;
       }
       
-  }
-  ```
-- Validation with `require();`
-  - example validation code
-  ```
-  function enter() public payable {
-    require(msg.value > 0.1 ether); // this means the person using the current function needs to send some eth value, before their address can be added to `address[]`
-
-    players.push(msg.sender);
   }
   ```
 
