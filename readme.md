@@ -196,6 +196,20 @@ Nested dynamic arrays in solidity cannot bridge to ABI/JS/Web3 world. We cannot 
 ![keys not stored](/public/images/05_130_keys_not_stored.png))
 - ***Values are not iterable in mappings***: We cannot loop through values in mappings.
 - ***All values exists in mappings***: if you lookup a key that doesn't exist in mapping, it will always returns true. if it is a string of arrays, it will return an empty string.
+- ***Get array of struts one by one***: As of time of writing, Solidity cannot return an array of struts. It has to be done, one by one. code below in solidity smart contract doesn't work
+```
+function getAllRequests() public view returns (Request[]) {
+  return requests;
+}
+
+// TypeError: Internal or recursive type is not allowed for public or external function getAllRequests() public view returns (Request[])
+```
+we can though get the total count with
+```
+function getRequestsCount() public view returns (uint256) {
+  return requests.length;
+}
+```
 
 ## Smart Contracts
 > **Older Libraries**: The libaries used in this section maybe deprecated, but the essence of the lessons remain the same. Refer to [update inbox project files](/public/articles/update_inbox_project.md) 
